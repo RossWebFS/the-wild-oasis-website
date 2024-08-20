@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Profile",
+};
+
 const Page = () => {
   return <div>Profile</div>;
 };
