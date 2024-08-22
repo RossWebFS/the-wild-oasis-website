@@ -1,5 +1,3 @@
-import { eachDayOfInterval } from "date-fns";
-
 import { supabase } from "@/app/_lib/supabase";
 
 // GET
@@ -41,8 +39,6 @@ export const getCabins = async () => {
     console.error(error);
     throw new Error("Cabins could not be loaded");
   }
-
-  console.log(data);
 
   return data;
 };
