@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import { supabase } from "@/app/_lib/supabase";
 
 // GET
@@ -10,6 +12,7 @@ export const getCabin = async id => {
 
   if (error) {
     console.error(error);
+    notFound();
   }
 
   return data;
