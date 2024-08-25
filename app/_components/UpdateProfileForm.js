@@ -1,6 +1,6 @@
 "use client";
 
-const UpdateProfileForm = ({children}) => {
+const UpdateProfileForm = ({ children }) => {
   return (
     <form className="flex flex-col gap-6 bg-primary-900 px-12 py-8 text-lg">
       <div className="space-y-2">
