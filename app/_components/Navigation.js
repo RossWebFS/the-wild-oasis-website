@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { auth } from "@/app/_lib/auth";
 
 const Navigation = async () => {
