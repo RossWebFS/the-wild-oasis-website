@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import Reservation from "@/app/_components/Reservation";
 import { getCabin, getCabins } from "@/app/_lib/data-services";
 import Spinner from "@/app/_components/Spinner";

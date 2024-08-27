@@ -4,8 +4,7 @@ import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import TextExpander from "@/app/_components/TextExpander";
 
 const Cabin = ({ cabin }) => {
-  const { id, name, maxCapacity, regularPrice, discount, image, description } =
-    cabin;
+  const { name, maxCapacity, image, description } = cabin;
 
   return (
     <div className="mb-24 grid grid-cols-[3fr_4fr] gap-20 border border-primary-800 px-10 py-3">
