@@ -2,6 +2,7 @@
 
 import { auth, signIn, signOut } from "@/app/_lib/auth";
 import { supabase } from "@/app/_lib/supabase";
+import { revalidatePath } from "next/cache";
 
 export const signInAction = async () => {
   await signIn("google", { redirectTo: "/account" });
@@ -29,4 +30,6 @@ export const updateGuest = async formData => {
     .eq("id", session.user.guestId);
 
   if (error) throw new Error("Guest could not be updated");
+
+  revalidatePath("/account/profile")
 };
