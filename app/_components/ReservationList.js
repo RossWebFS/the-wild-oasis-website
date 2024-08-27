@@ -3,19 +3,19 @@
 import { useOptimistic } from "react";
 
 import ReservationCard from "@/app/_components/ReservationCard";
-import { deleteReservation } from "@/app/_lib/actions";
+import { deleteBooking } from "@/app/_lib/actions";
 
 const ReservationList = ({ bookings }) => {
   const [optimisticBookings, optimisticDelete] = useOptimistic(
     bookings,
     (curBookings, bookingId) => {
-        return curBookings.filter(booking => booking.id !== bookingId)
+      return curBookings.filter(booking => booking.id !== bookingId);
     },
   );
 
-  const handleDelete = async (bookingId) => {
-    optimisticDelete(bookingId)
-    await deleteReservation(bookingId);
+  const handleDelete = async bookingId => {
+    optimisticDelete(bookingId);
+    await deleteBooking(bookingId);
   };
 
   return (
@@ -23,8 +23,8 @@ const ReservationList = ({ bookings }) => {
       {optimisticBookings.map(booking => (
         <ReservationCard
           booking={booking}
-          key={booking.id}
           onDelete={handleDelete}
+          key={booking.id}
         />
       ))}
     </ul>

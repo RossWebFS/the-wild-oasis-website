@@ -24,7 +24,7 @@ const Page = async () => {
           </a>
         </p>
       ) : (
-        <ReservationList booking={bookings} />
+        <ReservationList bookings={bookings} />
       )}
     </div>
   );

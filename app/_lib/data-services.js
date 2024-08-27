@@ -126,7 +126,7 @@ export const getBookings = async guestId => {
 };
 
 export const getBooking = async id => {
-  const { data, error, count } = await supabase
+  const { data, error } = await supabase
     .from("bookings")
     .select("*")
     .eq("id", id)

@@ -36,7 +36,7 @@ export const updateGuest = async formData => {
   revalidatePath("/account/profile");
 };
 
-export const deleteReservation = async bookingId => {
+export const deleteBooking = async bookingId => {
   const session = await auth();
   if (!session) throw new Error("You must be logged in");
 
@@ -65,7 +65,7 @@ export const updateBooking = async formData => {
   if (!session) throw new Error("You must be logged in");
 
   const guestBookings = await getBookings(session.user.guestId);
-  const guestBookingIds = guestBookings.map((booking) => booking.id);
+  const guestBookingIds = guestBookings.map(booking => booking.id);
 
   if (!guestBookingIds.includes(bookingId))
     throw new Error("You are not allowed to update this booking");
@@ -88,4 +88,29 @@ export const updateBooking = async formData => {
   revalidatePath("/account/reservations");
 
   redirect("/account/reservations");
+};
+
+export const createBooking = async (bookingData, formData) => {
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in");
+
+  const newBooking = {
+    ...bookingData,
+    guestId: session.user.guestId,
+    numGuests: Number(formData.get("numGuests")),
+    observations: formData.get("observations").slice(0, 1000),
+    extrasPrice: 0,
+    totalPrice: bookingData.cabinPrice,
+    isPaid: false,
+    hasBreakfast: false,
+    status: "unconfirmed",
+  };
+
+  const { error } = await supabase.from("bookings").insert([newBooking]);
+
+  if (error) throw new Error("Booking could not be created");
+
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
+
+  redirect("/cabins/thankyou");
 };

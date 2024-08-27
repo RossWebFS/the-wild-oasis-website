@@ -2,7 +2,6 @@ import { Josefin_Sans } from "next/font/google";
 
 import Header from "@/app/_components/Header";
 import { ReservationProvider } from "@/app/_components/ReservationContext";
-
 import "@/app/_styles/global.css";
 
 const josefinFont = Josefin_Sans({
