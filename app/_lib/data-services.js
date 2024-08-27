@@ -125,6 +125,21 @@ export const getBookings = async guestId => {
   return data;
 };
 
+export const getBooking = async id => {
+  const { data, error, count } = await supabase
+    .from("bookings")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not get loaded");
+  }
+
+  return data;
+};
+
 // CREATE
 export const createGuest = async newGuest => {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
