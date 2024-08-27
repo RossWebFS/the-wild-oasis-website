@@ -64,7 +64,6 @@ export const getBookedDatesByCabinId = async cabinId => {
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
 
-  // Getting all bookings
   const { data, error } = await supabase
     .from("bookings")
     .select("*")
@@ -76,7 +75,6 @@ export const getBookedDatesByCabinId = async cabinId => {
     throw new Error("Bookings could not get loaded");
   }
 
-  // Converting to actual dates to be displayed in the date picker
   const bookedDates = data
     .map(booking => {
       return eachDayOfInterval({
@@ -107,7 +105,23 @@ export const getGuest = async email => {
     .eq("email", email)
     .single();
 
-  // No error here! We handle the possibility of no guest in the sign in callback
+  return data;
+};
+
+export const getBookings = async guestId => {
+  const { data, error, count } = await supabase
+    .from("bookings")
+    .select(
+      "id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)",
+    )
+    .eq("guestId", guestId)
+    .order("startDate");
+
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings could not get loaded");
+  }
+
   return data;
 };
 
