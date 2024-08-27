@@ -71,7 +71,7 @@ const ReservationCard = ({ booking }) => {
       </div>
 
       <div className="flex w-[100px] flex-col border-l border-primary-800">
-        {isPast(startDate) && (
+        {!isPast(startDate) && (
           <>
             <Link
               href={`/account/reservations/edit/${id}`}
